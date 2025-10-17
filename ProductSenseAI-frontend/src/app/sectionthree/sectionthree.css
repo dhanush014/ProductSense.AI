@@ -1,0 +1,62 @@
+.sectionthree-container {
+    width: 75vw;
+    max-width: 1100px;
+    min-width: 300px;
+    background-color: #121212;
+    box-shadow: 0 0 15px #00BFFF66;
+    border-radius: 12px;
+  }
+  
+  .timer {
+    width: 10vw;
+    min-width: 140px;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid #00BFFF;
+    box-shadow: 0 0 12px #00BFFF;
+    user-select: none;
+    z-index: 1050;
+  }
+  
+  .estimate-input {
+    background-color: #1e1e1e;
+    color: #fff;
+    border: 1.5px solid #444444;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: bold;
+    box-shadow: 0 0 5px #00808050;
+  }
+  
+  .estimate-input:focus {
+    border-color: #00BFFF;
+    box-shadow: 0 0 8px #00BFFF;
+    background-color: #181b20;
+  }
+  
+  .reason-textarea {
+    background-color: #181b20;
+    color: #fff;
+    border: 1.5px solid #444;
+    border-radius: 8px;
+    box-shadow: 0 0 5px #00808050;
+  }
+  .reason-textarea:focus {
+    border-color: #008080;
+    box-shadow: 0 0 6px #008080;
+    background-color: #16191A;
+  }
+  /* Hide spinner for input[type="number"] on Chrome, Safari, Edge */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide spinner for input[type="number"] on Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+::placeholder {
+    color: #cccccc; /* Light gray color */
+    opacity: 1; /* Ensures opacity in some browsers */
+  }

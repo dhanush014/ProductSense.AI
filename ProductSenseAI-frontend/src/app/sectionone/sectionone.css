@@ -1,0 +1,36 @@
+/* MCQ Container */
+.mcq-container {
+    width: 70vw;                 /* 70% of viewport width */
+    max-width: 1100px;
+    min-width: 300px;
+    background-color: #121212;   /* dark background */
+    box-shadow: 0 0 15px #00BFFF66; /* neon blue glow */
+    border-radius: 12px;
+  }
+  
+  /* Timer Styling */
+  .timer {
+    width: 10vw;                  /* approx 15% screen width */
+    min-width: 140px;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid #00BFFF;
+    box-shadow: 0 0 12px #00BFFF;
+    user-select: none;
+    z-index: 1050;
+  }
+  
+  /* Radio inputs and labels */
+  .form-check-input {
+    accent-color: #00BFFF; /* neon blue */
+  }
+  
+  .form-check-label {
+    user-select: none;
+    font-size: 1rem;
+  }
+  
+  /* Adjust margin around questions */
+  .form-check {
+    margin-bottom: 0.8rem;
+  }
+  

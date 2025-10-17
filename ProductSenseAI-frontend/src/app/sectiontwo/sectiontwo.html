@@ -1,0 +1,54 @@
+<!-- Timer outside content, top-right -->
+<div 
+  class="timer position-fixed top-0 end-0 mt-3 me-3 p-3 bg-dark bg-opacity-75 text-center rounded"
+>
+  <div class="fs-6">Time Left</div>
+  <div class="fs-4 fw-bold">
+    {{ (timer() / 60) | number:'1.0-0' }}:{{ (timer() % 60) < 10 ? ('0' + (timer() % 60)) : (timer() % 60) }}
+  </div>
+</div>
+
+<!-- Question Content Container -->
+<div class="sectiontwo-container text-white mx-auto my-5 p-4 rounded">
+
+  <h2 class="mb-4">Root Cause Analysis Question</h2>
+  
+  <div>
+    <strong>Scenario:</strong>
+    <p class="my-2">{{bigQuestions[questionIndex].scenario}}</p>
+  </div>
+  <div>
+    <strong>Data Points:</strong>
+    <ul class="mb-3">
+      <li *ngFor="let dp of bigQuestions[questionIndex].dataPoints">{{dp}}</li>
+    </ul>
+  </div>
+  <div>
+    <strong>Question:</strong>
+    <p class="mb-3">{{bigQuestions[questionIndex].followUp}}</p>
+  </div>
+  <small class="text-warning fst-italic">
+    ⚠️ You need to type something that has 30 characters atleast..
+  </small>
+  <textarea
+    class="form-control mb-4 big-textarea"
+    rows="8"
+    [(ngModel)]="answer"
+    placeholder="Type your thoughts here..."
+    style="font-size:1rem"
+  ></textarea>
+
+  <div class="d-flex justify-content-between align-items-center">
+    <small class="text-warning fst-italic">
+      ⚠️ You cannot go back once you press Next
+    </small>
+    <button
+      type="button"
+      class="btn btn-primary"
+      [disabled]="answer.trim().length < 30"
+      (click)="onNext()"
+    >
+      Next Section
+    </button>
+  </div>
+</div>

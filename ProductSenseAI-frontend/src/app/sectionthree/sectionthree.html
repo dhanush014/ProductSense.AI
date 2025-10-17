@@ -1,0 +1,59 @@
+<!-- Timer top-right, outside main container -->
+<div 
+  class="timer position-fixed top-0 end-0 mt-3 me-3 p-3 bg-dark bg-opacity-75 text-center rounded"
+>
+  <div class="fs-6">Time Left</div>
+  <div class="fs-4 fw-bold">
+    {{ (timer() / 60) | number:'1.0-0' }}:{{ (timer() % 60) < 10 ? ('0' + (timer() % 60)) : (timer() % 60) }}
+  </div>
+</div>
+
+<div class="sectionthree-container text-white mx-auto my-5 p-4 rounded">
+  <h2 class="mb-4">📊 Estimation Question</h2>
+  
+  <div>
+    <strong>Scenario:</strong>
+    <p class="my-2">{{question}}</p>
+  </div>
+
+  <strong>Hints:</strong>
+  <ul class="mb-3">
+    <li *ngFor="let hint of hints">{{hint}}</li>
+  </ul>
+
+  <div class="mb-4">
+    <input
+      type="number"
+      [(ngModel)]="estimate"
+      class="form-control estimate-input mx-auto"
+      placeholder="Enter your estimate"
+      style="max-width: 300px; font-size:1.15rem"
+      min="0"
+      required
+    />
+  </div>
+  
+  <div class="mb-4">
+    <textarea
+      class="form-control reason-textarea"
+      rows="4"
+      [(ngModel)]="reasoning"
+      placeholder="Explain your reasoning here (optional)"
+      style="font-size:1rem"
+    ></textarea>
+  </div>
+  
+  <div class="d-flex justify-content-between align-items-center">
+    <small class="text-warning fst-italic">
+      ⚠️ You cannot go back once you press Submit
+    </small>
+    <button
+      type="button"
+      class="btn btn-primary"
+      [disabled]="estimate === null || estimate === undefined"
+      (click)="onSubmit()"
+    >
+      Submit Interview
+    </button>
+  </div>
+</div>

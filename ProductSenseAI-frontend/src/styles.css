@@ -1,0 +1,52 @@
+/* You can add global styles to this file, and also import other style files */
+/* Global body styling */
+body {
+    background-color: #121212; /* dark gray background */
+    color: #ffffff;           /* white text */
+    font-family: 'Inter', sans-serif; /* clean modern font */
+  }
+  
+  /* Neon blue and teal accent colors for buttons */
+  .btn-primary {
+    background-color: #00BFFF;  /* neon blue */
+    border-color: #00BFFF;
+    box-shadow: 0 0 8px #00BFFF;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  .btn-primary:hover, .btn-primary:focus {
+    background-color: #008080;  /* teal on hover */
+    border-color: #008080;
+    box-shadow: 0 0 15px #008080;
+  }
+  
+  /* Form inputs styling with neon glow on focus */
+  .form-control {
+    background-color: #1E1E1E; /* dark input background */
+    color: white;
+    border: 1px solid #444444;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  .form-control:focus {
+    background-color: #121212;
+    border-color: #00BFFF;
+    box-shadow: 0 0 8px #00BFFF;
+    color: white;
+  }
+  
+  /* Error message style */
+  .text-danger {
+    color: #00BFFF;
+  }
+  
+  /* Links, highlights, and progress */
+  a, .text-info {
+    color: #00BFFF;
+  }
+  
+  /* Customize card backgrounds if used */
+  .card {
+    background-color: #1E1E1E;
+    border: none;
+    box-shadow: 0 0 10px rgba(0,191,255,0.4);
+  }
+  

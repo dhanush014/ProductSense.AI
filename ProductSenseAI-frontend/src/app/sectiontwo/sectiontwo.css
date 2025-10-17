@@ -1,0 +1,38 @@
+.sectiontwo-container {
+    width: 80vw;
+    max-width: 1100px;
+    min-width: 300px;
+    background-color: #121212;
+    box-shadow: 0 0 15px #00BFFF66;
+    border-radius: 12px;
+  }
+  
+  .timer {
+    width: 5vw;
+    min-width: 140px;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid #00BFFF;
+    box-shadow: 0 0 12px #00BFFF;
+    user-select: none;
+    z-index: 1050;
+  }
+  
+  .big-textarea {
+    background-color: #1e1e1e;
+    color: #fff;
+    border: 1.5px solid #444444;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 0 5px #00808050;
+  }
+  
+  .big-textarea:focus {
+    border-color: #00BFFF;
+    box-shadow: 0 0 8px #00BFFF;
+    background-color: #181b20;
+    outline: none;
+  }
+  ::placeholder {
+    color: #cccccc; /* Light gray color */
+    opacity: 1; /* Ensures opacity in some browsers */
+  }

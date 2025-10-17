@@ -1,0 +1,47 @@
+<!-- Timer outside mcq-container aligned to right 15% of the screen -->
+<div 
+  class="timer position-fixed top-0 end-0 mt-3 me-3 p-3 bg-dark bg-opacity-75 text-center rounded"
+>
+  <div class="fs-6">Time Left</div>
+  <div class="fs-4 fw-bold">
+    {{ (timer() / 60) | number:'1.0-0' }}:{{ (timer() % 60) < 10 ? ('0' + (timer() % 60)) : (timer() % 60) }}
+  </div>
+</div>
+
+<!-- MCQs container with 70% width, centered -->
+<div class="mcq-container text-white mx-auto my-5 p-4 rounded">
+
+  <h2 class="mb-4">Hi {{name}}, welcome to your PM interview</h2>
+
+  <form>
+    <div *ngFor="let q of questions; index as i" class="mb-5">
+      <p class="fs-5">{{q.question}}</p>
+      <div *ngFor="let option of q.options" class="form-check">
+        <input
+          type="radio"
+          [id]="'q' + i + option"
+          name="question{{i}}"
+          [value]="option"
+          [checked]="selectedAnswers[i] === option"
+          (change)="onAnswerSelect(i, option)"
+          class="form-check-input"
+        />
+        <label [for]="'q' + i + option" class="form-check-label ms-2">{{option}}</label>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <small class="text-warning fst-italic">
+        ⚠️ You cannot go back once you press Next
+      </small>
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="selectedAnswers.includes(null)"
+        (click)="onNext()"
+      >
+        Next Section
+      </button>
+    </div>
+  </form>
+</div>
