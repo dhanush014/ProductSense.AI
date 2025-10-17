@@ -1,36 +1,116 @@
 /* MCQ Container */
 .mcq-container {
-    width: 70vw;                 /* 70% of viewport width */
+    width: 75vw;                 /* 70% of viewport width */
     max-width: 1100px;
     min-width: 300px;
     background-color: #121212;   /* dark background */
     box-shadow: 0 0 15px #00BFFF66; /* neon blue glow */
     border-radius: 12px;
   }
+
+  .mcq-intro {
+    margin-bottom: 2rem;
+  }
+  .intro-title {
+    color: #00BFFF;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 8px #00bfff22;
+  }
+  .intro-desc {
+    color: #d3f6ff;
+    font-size: 1.08rem;
+    font-family: 'Roboto', Arial, sans-serif;
+    margin-bottom: 0.4rem;
+    font-weight: 400;
+    opacity: 0.94;
+  }
   
-  /* Timer Styling */
+  
   .timer {
-    width: 10vw;                  /* approx 15% screen width */
+    top: 3.8rem;      /* push the timer down from very top, adjust as needed */
+    right: 2.2rem;
+    position: fixed;
+    width: 10vw;
     min-width: 140px;
-    font-family: 'Inter', sans-serif;
-    border: 1px solid #00BFFF;
-    box-shadow: 0 0 12px #00BFFF;
-    user-select: none;
+    background: #181e24;
+    border: 1.5px solid #00BFFF;
+    box-shadow: 0 0 12px #00BFFF45;
+    color: #d3f6ff !important;
+    text-align: center;
+    border-radius: 13px;
     z-index: 1050;
+    font-family: 'Roboto', Arial, sans-serif;
   }
+  .timer,
+.timer .fs-6,
+.timer .fs-4,
+.timer * {
+  color: #d3f6ff !important;
+}
   
-  /* Radio inputs and labels */
-  .form-check-input {
-    accent-color: #00BFFF; /* neon blue */
+h2, .fs-5 {
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+
+/* RADIO BUTTON THEME */
+input[type="radio"] {
+  accent-color: #00BFFF !important;       /* NEON fill when checked */
+  width: 20px; height: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00BFFF44;
+  margin-right: 10px;
+}
+
+input[type="radio"]:focus {
+  outline: 2px solid #00BFFF88;
+  box-shadow: 0 0 12px #00BFFF99;
+}
+
+.form-check-label {
+  color: #fff !important;
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: 'Roboto', Arial, sans-serif;
+  margin-left: 8px;
+}
+
+.form-check {
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+}
+
+.form-check-input {
+  margin-top: 0 !important;
+}
+.mb-5 {
+  margin-bottom: 2rem !important;
+}
+
+  
+  .next-btn {
+    background: linear-gradient(90deg,#00BFFF 80%,#19dad2 100%);
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 11px;
+    padding: 0.9rem 2.1rem;
+    box-shadow: 0 0 14px #00BFFF66;
+    transition: background 0.15s, box-shadow 0.16s, color 0.12s;
+    cursor: pointer;
+    margin-left: 1.5rem;
+    margin-right: 0.2rem;
+    display: inline-block;
   }
-  
-  .form-check-label {
-    user-select: none;
-    font-size: 1rem;
-  }
-  
-  /* Adjust margin around questions */
-  .form-check {
-    margin-bottom: 0.8rem;
+  .next-btn:hover, .next-btn:focus {
+    background: #19dad2;
+    box-shadow: 0 0 22px #00bfff99;
+    color: #e0f8ff;
   }
   

@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Navbar } from '../navbar/navbar';
 
 interface Question {
   question: string;
@@ -11,7 +12,7 @@ interface Question {
 
 @Component({
   selector: 'app-sectionone',
-  imports: [CommonModule],
+  imports: [CommonModule, Navbar],
   templateUrl: './sectionone.html',
   styleUrl: './sectionone.css'
 })
@@ -55,7 +56,7 @@ export class Sectionone {
         this.timer.set(current - 1);
       } else {
         clearInterval(interval);
-        // Optionally auto-submit or disable inputs here
+        this.onNext();
       }
     }, 1000);
   }

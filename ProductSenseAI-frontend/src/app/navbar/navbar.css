@@ -1,0 +1,43 @@
+/* Navbar Styles */
+.topbar {
+    width: 100vw;
+    height: 44px;
+    background: rgba(12, 18, 20, 0.82);
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #23272b;
+    padding: 0 1.8rem;
+    position: fixed;
+    top: 0; left: 0; z-index: 20;
+  }
+  
+  .brand-area {
+    display: flex; align-items: center; gap: 0.45rem;
+    height: 44px;
+  }
+  .brand-logo {
+    height: 32px;
+    width: auto;
+    margin-right: 0.6rem;
+    object-fit: contain;
+    filter: drop-shadow(0 0 2px #00bfff11);
+    border-radius: 6px; /* gentle rounding for rectangular logo */
+    background: none; /* remove any background or radial gradient */
+    box-shadow: none;
+  }
+  .brand-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.7px;
+    color: #00BFFF;
+    font-weight: 700;
+    text-shadow: 0 0 2px #00BFFF66;
+  }
+  .ai-flare {
+    color: #19dad2;
+    font-family: 'Orbitron', sans-serif;
+    font-style: normal;
+    font-size: 1.4rem;
+    text-shadow: 0 0 1.5px #19dad259;
+  }

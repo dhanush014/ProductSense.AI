@@ -1,6 +1,8 @@
+<app-navbar></app-navbar>
+
 <!-- Timer outside mcq-container aligned to right 15% of the screen -->
 <div 
-  class="timer position-fixed top-0 end-0 mt-3 me-3 p-3 bg-dark bg-opacity-75 text-center rounded"
+  class="timer position-fixed end-0 mt-5 me-3 p-3 bg-dark bg-opacity-75 text-center rounded"
 >
   <div class="fs-6">Time Left</div>
   <div class="fs-4 fw-bold">
@@ -11,8 +13,14 @@
 <!-- MCQs container with 70% width, centered -->
 <div class="mcq-container text-white mx-auto my-5 p-4 rounded">
 
-  <h2 class="mb-4">Hi {{name}}, welcome to your PM interview</h2>
-
+  <div class="mcq-intro mb-4">
+    <h2 class="intro-title">🚀 Ready to show off your Product Sense?</h2>
+    <div class="intro-desc">
+      This round is multiple-choice.<br>
+      You have 5 minutes—the timer auto-submits your answers when time is up. Choose wisely and don’t look back!
+    </div>
+  </div>
+  
   <form>
     <div *ngFor="let q of questions; index as i" class="mb-5">
       <p class="fs-5">{{q.question}}</p>
@@ -26,7 +34,7 @@
           (change)="onAnswerSelect(i, option)"
           class="form-check-input"
         />
-        <label [for]="'q' + i + option" class="form-check-label ms-2">{{option}}</label>
+        <label [for]="'q' + i + option" class="form-check-label">{{option}}</label>
       </div>
     </div>
 

@@ -1,13 +1,10 @@
-<nav class="topbar">
-  <div class="brand-area">
-    <span class="brand-logo"></span>
-    <span class="brand-name">ProductSense<span class="ai-flare">.ai</span></span>
-  </div>
-</nav>
+<app-navbar></app-navbar>
+
 
 <div class="landing-center-content">
-  <h1 class="neon-h1">Hi, welcome to <span>ProductSense.ai</span></h1>
-  <p class="animated-subtitle">Your AI-powered Product Management interview coach.</p>
+  <h1 class="neon-h1">Welcome to <span class="brand-name" style="font-size: 2rem;">ProductSense<span class="ai-flare" style="color: #19dad2; font-size: 2rem">.ai</span></span></h1>
+  <p id="typingSubtitle" class="typing-subtitle">Your AI-powered Product Management interview coach.</p>
+
     <form [formGroup]="landingForm" (ngSubmit)="onSubmit()" novalidate>
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
@@ -42,7 +39,9 @@
         </div>
       </div>
   
-      <button type="submit" class="btn btn-primary">Start Interview</button>
-    </form>
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="start-btn">Start Interview</button>
+      </div>
+          </form>
   </div>
   
