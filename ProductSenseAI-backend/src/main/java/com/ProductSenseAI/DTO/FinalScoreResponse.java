@@ -14,5 +14,4 @@ public class FinalScoreResponse {
     
     public String getThankYouMessage() { return thankYouMessage; }
     public void setThankYouMessage(String thankYouMessage) { this.thankYouMessage = thankYouMessage; }
-
 }

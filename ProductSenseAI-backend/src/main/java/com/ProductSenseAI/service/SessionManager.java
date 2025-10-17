@@ -5,7 +5,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
 import com.ProductSenseAI.DTO.InterviewSession;
-
 @Service
 public class SessionManager {
     private final ConcurrentHashMap<String, InterviewSession> sessions = new ConcurrentHashMap<>();

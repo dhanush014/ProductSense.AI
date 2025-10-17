@@ -43,6 +43,7 @@ export class Sectiontwo {
       } else {
         clearInterval(interval);
         // Optional: disable input or auto-submit
+        this.onNext();
       }
     }, 1000);
   }

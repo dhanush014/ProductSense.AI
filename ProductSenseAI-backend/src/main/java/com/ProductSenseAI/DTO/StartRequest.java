@@ -4,7 +4,6 @@ public class StartRequest {
 	private String name;
     private String choice; // "platform", "data", or "growth"
     
-    // Constructors
     public StartRequest() {}
     
     public StartRequest(String name, String choice) {
@@ -12,7 +11,6 @@ public class StartRequest {
         this.choice = choice;
     }
     
-    // Getters and Setters
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     

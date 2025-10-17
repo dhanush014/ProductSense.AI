@@ -35,6 +35,8 @@ export class Sectionthree implements OnInit{
       } else {
         clearInterval(interval);
         // Optionally disable inputs or auto-submit
+      
+        this.onSubmit();
       }
     }, 1000);
   }
