@@ -1,20 +1,20 @@
-# Stage 1: build
-FROM maven:3.9.6-eclipse-temurin-21 AS build
-WORKDIR /app
+# Stage 1: Build with JDK 24
+FROM eclipse-temurin:24-jdk AS jdk24
 
-# Copy only backend files into context
+# Install Maven manually
+RUN \
+  apt-get update && \
+  apt-get install -y maven && \
+  rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
 COPY pom.xml .
 COPY src ./src
-
-# Build the jar
 RUN mvn clean package -DskipTests
 
-# Stage 2: package
-FROM eclipse-temurin:21-jdk
+# Stage 2: Packaging with JDK 24
+FROM eclipse-temurin:24-jdk
 WORKDIR /app
-
-# Copy the built jar
-COPY --from=build /app/target/*.jar app.jar
-
+COPY --from=jdk24 /app/target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
