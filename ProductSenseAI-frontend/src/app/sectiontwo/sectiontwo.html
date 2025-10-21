@@ -16,20 +16,20 @@
   
   <div>
     <strong>Scenario:</strong>
-    <p class="my-2">{{bigQuestions[questionIndex].scenario}}</p>
+    <p class="my-2">{{ scenario }}</p>
   </div>
   <div>
     <strong>Data Points:</strong>
     <ul class="mb-3">
-      <li *ngFor="let dp of bigQuestions[questionIndex].dataPoints">{{dp}}</li>
+      <li *ngFor="let dp of dataPoints">{{ dp }}</li>
     </ul>
   </div>
   <div>
     <strong>Question:</strong>
-    <p class="mb-3">{{bigQuestions[questionIndex].followUp}}</p>
+    <p class="mb-3">{{ followUp }}</p>
   </div>
   <small class="text-warning fst-italic">
-    ⚠️ You need to type something that has 30 characters atleast..
+    ⚠️ You need to type something that has 30 characters at least...
   </small>
   <textarea
     class="form-control mb-4 big-textarea"

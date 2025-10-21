@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Navbar } from '../navbar/navbar';
+import { ApiService } from '../api.service';
+import { InterviewStateService } from '../interview-state-service';
 
 interface Question {
   question: string;
@@ -17,36 +19,34 @@ interface Question {
   styleUrl: './sectionone.css'
 })
 export class Sectionone {
-  name = 'User';  // TODO: Replace with actual passed value or service state
+  name = '';
   timer = signal(300); // 300 seconds = 5 mins
-  questions: Question[] = [
-    {
-      question: 'What is the main responsibility of a Platform PM?',
-      options: ['Option A: Manage hardware', 'Option B: Manage APIs and infrastructure', 'Option C: Handle sales', 'Option D: Customer support']
-    },
-    {
-      question: 'Which metric is most important for Growth PMs?',
-      options: ['Option A: Revenue', 'Option B: User activation', 'Option C: Internal tools', 'Option D: Server up-time']
-    },
-    {
-      question: 'Data PMs focus mostly on:',
-      options: ['Option A: UI design', 'Option B: Data pipelines and analytics', 'Option C: Marketing', 'Option D: Customer support']
-    },
-    {
-      question: 'Choose the correct approach for product scaling:',
-      options: ['Option A: Ignore data', 'Option B: Use experiments', 'Option C: Reduce team size', 'Option D: Stop development']
-    },
-    {
-      question: 'Effective PM communication includes:',
-      options: ['Option A: Clarity', 'Option B: Vague instructions', 'Option C: Avoiding meetings', 'Option D: Not sharing plans']
-    }
-  ];
 
-  selectedAnswers: (string | null)[] = Array(this.questions.length).fill(null);
-  constructor(private router: Router) {}
+  questions: Question[] = [];
+  wittyGreeting = '';
+  selectedAnswers: (string | null)[] = [];
+
+  sessionId = '';
+
+  constructor(private router: Router, private api:ApiService,private stateService: InterviewStateService) {}
 
   ngOnInit(): void {
+
+    this.sessionId = localStorage.getItem('sessionId') ?? '';
+    this.wittyGreeting = localStorage.getItem('wittyGreeting') ?? '';
+
+    this.api.getMcq(this.sessionId, 'mcq', 0).subscribe({
+      next: (resp) => {
+        this.questions = resp.questions;
+        this.selectedAnswers = Array(this.questions.length).fill(null);
+      },
+      error: (err) => {
+        console.error('Failed to load MCQ questions', err);
+      }
+    });
+
     this.startTimer();
+    
   }
 
   startTimer(): void {
@@ -66,7 +66,24 @@ export class Sectionone {
   }
 
   onNext(): void {
-    // Optionally validate all questions answered before routing
+    const mcqAnswersFormatted = this.questions.map((q, index) => ({
+      question: q.question,
+      answer: this.selectedAnswers[index]
+    }));
+    this.stateService.setState('mcqAnswers', mcqAnswersFormatted);
+     // Example: submit all answers sequentially or batched
+    //  for (let i=0; i < this.questions.length; i++) {
+    //   const answer = this.selectedAnswers[i];
+    //   if (answer != null) {
+    //     this.api.submitAnswer(this.sessionId, 'mcq', i, answer).subscribe({
+    //       next: () => console.log(`Answer ${i} submitted`),
+    //       error: e => console.error(`Submit failed for answer ${i}`, e)
+    //     });
+    //   }
+    // }
     this.router.navigate(['/section2']);
+  
+    // Optionally validate all questions answered before routing
+    // this.router.navigate(['/section2']);
   }
 }

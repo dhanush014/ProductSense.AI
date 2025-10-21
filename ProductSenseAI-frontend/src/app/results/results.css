@@ -1,94 +1,97 @@
 .results-container {
-    background: linear-gradient(135deg, #121212 80%, #181b20 140%);
-    box-shadow: 0 0 50px #00BFFF55;
-    border-radius: 16px;
-    max-width: 950px;
-    width: 90vw;
-    color: #fff;
-    margin-top: 40px;
-  }
-  
-  /* Rectangular score section */
-  .score-rect {
-    width: 70vw;
-    max-width: 560px;
-    height: 140px;
-    background-color: #181b20;
-    box-shadow: 0 0 18px #00BFFF99;
-    border-radius: 26px;
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .score-value {
-    color: #00BFFF;
-    font-size: 4rem;
-    font-weight: bold;
-    margin-bottom: -10px;
-    text-shadow: 0 0 14px #00BFFF;
-  }
-  
-  .score-outof {
-    font-size: 1.5rem;
-    color: #bbb;
-  }
-  
-  .score-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #00BFFF;
-    text-shadow: 0 0 12px #00BFFF;
-  }
-  
-  /* Feedback Box - more solid, rectangular and modern */
-  .feedback-section {
-    background-color: #181b24;
-    border-radius: 18px;
-    border: 1.5px solid #008080;
-    box-shadow: 0 0 20px #00e0ff33;
-    color: #fff;
-    opacity: 0.98;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .feedback-head {
-    color: #00BFFF;
-    font-weight: bold;
-    text-shadow: 0 0 8px #00BFFF;
-  }
-  
-  /* Thanks Section */
-  .thanks-section {
-    color: #00BFFF;
-    margin-top: 12px;
-  }
-  .thank-heading {
-    color: #00BFFF;
-    font-size: 1.65rem;
-    font-weight: 700;
-    text-shadow: 0 0 9px #00BFFF;
-  }
-  .thanks-subheading {
-    color: #73eaff;
-    font-size: 1.1rem;
-  }
-  
-  .btn-outline-primary {
-    border-color: #00BFFF;
-    color: #00BFFF;
-    background-color: transparent;
-    box-shadow: 0 0 8px #00BFFF80;
-    font-weight: bold;
-  }
-  
-  .btn-outline-primary:hover, .btn-outline-primary:focus {
-    background-color: #00BFFF;
-    color: #fff;
-    box-shadow: 0 0 18px #00BFFF;
-  }
-  
+  background: linear-gradient(135deg, #121212 80%, #181b20 140%);
+  box-shadow: 0 0 40px #00BFFF44; /* Increased from 30px #00BFFF22 */
+  border-radius: 16px;
+  max-width: 950px;
+  width: 90vw;
+  color: #fff;
+  margin-top: 40px;
+}
+
+/* Rectangular score section */
+.score-rect {
+  width: 70vw;
+  max-width: 560px;
+  height: 140px;
+  background-color: #181b20;
+  border: 2px solid #00BFFF; /* 🟢 ADD: Cyan border */
+  box-shadow: 0 0 20px #00BFFF55, inset 0 0 20px #00BFFF11; /* 🟢 ADD: Outer + inner glow */
+  border-radius: 26px;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.score-value {
+  color: #00BFFF;
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: -10px;
+  text-shadow: 0 0 10px #00BFFF88; 
+  letter-spacing: 2px; 
+}
+
+.score-outof {
+  font-size: 1.5rem;
+  color: #bbb;
+}
+
+.score-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #00BFFF;
+  text-shadow: 0 0 8px #00BFFF77; 
+  letter-spacing: 1px;
+}
+.feedback-section {
+  background-color: #181b24;
+  border-radius: 18px;
+  border: 1px solid #008080;
+  box-shadow: 0 0 12px #00e0ff1a; /* Reduced from 20px #00e0ff33 */
+  color: #fff;
+  opacity: 0.98;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feedback-head {
+  color: #00BFFF;
+  font-weight: bold;
+  text-shadow: 0 0 3px #00BFFF44; /* Reduced from 8px #00BFFF */
+}
+
+/* Thanks Section */
+.thanks-section {
+  color: #00BFFF;
+  margin-top: 12px;
+}
+
+.thank-heading {
+  color: #00BFFF;
+  font-size: 1.65rem;
+  font-weight: 700;
+  text-shadow: 0 0 4px #00BFFF55; /* Reduced from 9px #00BFFF */
+}
+
+.thanks-subheading {
+  color: #73eaff;
+  font-size: 1.1rem;
+}
+
+.btn-outline-primary {
+  border-color: #00BFFF;
+  color: #00BFFF;
+  background-color: transparent;
+  box-shadow: 0 0 5px #00BFFF44; /* Reduced from 8px #00BFFF80 */
+  font-weight: bold;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus {
+  background-color: #00BFFF;
+  color: #fff;
+  box-shadow: 0 0 10px #00BFFF; /* Reduced from 18px #00BFFF */
+}

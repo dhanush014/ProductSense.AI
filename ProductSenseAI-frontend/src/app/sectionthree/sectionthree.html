@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <!-- Timer top-right, outside main container -->
 <div 
   class="timer position-fixed top-0 end-0 mt-3 me-3 p-3 bg-dark bg-opacity-75 text-center rounded"
@@ -8,9 +10,10 @@
   </div>
 </div>
 
-<div class="sectionthree-container text-white mx-auto my-5 p-4 rounded">
+<div *ngIf="loading" class="text-center">Loading estimation question...</div>
+
+<div *ngIf="!loading" class="sectionthree-container text-white mx-auto my-5 p-4 rounded">
   <h2 class="mb-4">📊 Estimation Question</h2>
-  
   <div>
     <strong>Scenario:</strong>
     <p class="my-2">{{question}}</p>

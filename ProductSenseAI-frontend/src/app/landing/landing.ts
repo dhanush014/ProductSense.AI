@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Navbar } from '../navbar/navbar';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-landing',
@@ -19,9 +20,15 @@ export class Landing implements OnInit{
   landingForm!: FormGroup;
 
   submitted = false;
+  wittyGreeting = '';
+  mcqQuestions: any[] = [];
 
-  constructor(private fb: FormBuilder, private router: Router) {}
- 
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private api: ApiService // Inject your service here
+  ) {}
+  
   ngAfterViewInit() {
     this.loopTyping();
   }
@@ -70,8 +77,38 @@ export class Landing implements OnInit{
     // Process form values or store in a service as needed
     const { name, role } = this.landingForm.value;
     console.log('Starting interview for', name, role);
+    // this.api.startInterview(name, role).subscribe({
+    //   next: resp => {
+    //     console.log(resp)
+    //     // Save session information for next sections
+    //     localStorage.setItem('sessionId', resp.sessionId);
+    //     localStorage.setItem('wittyGreeting', resp.wittyGreeting);
+        
+    //     this.wittyGreeting = resp.wittyGreeting;
+    //     this.api.getMcq(resp.sessionId, 'mcq', 0).subscribe(mcqResp => {
+    //       this.mcqQuestions = mcqResp.questions;
+    //       // Save questions in localStorage/session or a shared service
+    //       localStorage.setItem('mcqQuestions', JSON.stringify(this.mcqQuestions));
+    //       localStorage.setItem('wittyGreeting', this.wittyGreeting);
+    //       this.router.navigate(['/sectionone']);
+    //     });
 
-    // Navigate to next route
-    this.router.navigate(['/section1']);
+    //   },
+    //   error: err => {
+    //     alert('Could not start interview, please try again later');
+    //     console.error(err);
+    //   }
+    // });
+
+    this.api.startInterview(name, role).subscribe({
+      next: resp => {
+        localStorage.setItem('sessionId', resp.sessionId);
+        localStorage.setItem('wittyGreeting', resp.wittyGreeting);
+        localStorage.setItem('userName', name);
+        localStorage.setItem('choice', role);
+        this.router.navigate(['/section1']);
+      },
+      error: () => alert('Failed to start interview. Please try again.')
+    });
   }
 }
