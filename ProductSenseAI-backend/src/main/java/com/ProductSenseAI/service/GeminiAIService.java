@@ -88,23 +88,65 @@ public class GeminiAIService {
         
         return parseJSON(response, EstimationQuestion.class);
     }
-    public String gradeInterview(String userName, String choice, String allAnswers) {
-        String prompt = "You are a product management interviewer. " +
-                        "Grade the following interview answers for " + userName + 
-                        " who interviewed for a " + choice + " PM role.\n\n" +
-                        "Interview Answers:\n" + allAnswers + "\n\n" +
-                        "Provide:\n" +
-                        "1. A score out of 100\n" +
-                        "2. Detailed feedback on strengths and areas for improvement\n" +
-                        "3. Specific suggestions for each question type\n" +
-                        "4. An encouraging closing message";
+    public FinalScoreResponse gradeInterview(FinalScoreRequest request) {
+        String prompt = buildGradingPrompt(request);
         
-        return chatClient.prompt()
-                         .user(prompt)
-                         .call()
-                         .content();
+        String response = chatClient.prompt()
+                                    .user(prompt)
+                                    .call()
+                                    .content();
+        
+        return parseJSON(response, FinalScoreResponse.class);
     }
- // Parse single JSON object
+
+    
+    private String buildGradingPrompt(FinalScoreRequest req) {
+    	StringBuilder prompt = new StringBuilder();
+        
+        prompt.append("You are a product management interviewer. Grade the candidate's interview for a ")
+              .append(req.getChoice())
+              .append(" PM role.\n\n");
+        prompt.append("=== MCQ Questions and Candidate Answers ===\n");
+        int mcqIndex = 1;
+        for (MCQAnswer mcq : req.getMcqAnswers()) {
+            prompt.append("Q").append(mcqIndex).append(": ").append(mcq.getQuestion()).append("\n");
+            prompt.append("A").append(mcqIndex).append(": ").append(mcq.getAnswer()).append("\n\n");
+            mcqIndex++;
+        }
+        prompt.append("=== Root Cause Analysis ===\n");
+        prompt.append("Scenario: ").append(req.getRca().getQuestion().getScenario()).append("\n");
+        prompt.append("Data Points:\n");
+        for (String dp : req.getRca().getQuestion().getDataPoints()) {
+            prompt.append("  - ").append(dp).append("\n");
+        }
+        prompt.append("Follow-up: ").append(req.getRca().getQuestion().getFollowUp()).append("\n");
+        prompt.append("Candidate's Answer: ").append(req.getRca().getAnswer()).append("\n\n");
+
+        prompt.append("=== Estimation Question ===\n");
+        prompt.append("Question: ").append(req.getEstimation().getQuestion().getQuestion()).append("\n");
+        prompt.append("Hints:\n");
+        for (String hint : req.getEstimation().getQuestion().getHints()) {
+            prompt.append("  - ").append(hint).append("\n");
+        }
+        prompt.append("Estimate: ").append(req.getEstimation().getEstimate()).append("\n");
+        prompt.append("Reasoning: ").append(req.getEstimation().getReasoning()).append("\n\n");
+
+        prompt.append("=== Grading Instructions ===\n");
+        prompt.append("Return ONLY valid JSON with this exact structure:\n");
+        prompt.append("{\n");
+        prompt.append("  \"score\": <number 0-100>,\n");
+        prompt.append("  \"feedback\": \"<Detailed feedback on strengths and areas for improvement>\",\n");
+        prompt.append("  \"suggestion\": \"<At least one actionable suggestion for growth>\",\n");
+        prompt.append("  \"closing\": \"<Encouraging closing message>\"\n");
+        prompt.append("}\n\n");
+        prompt.append("Do NOT include markdown formatting or any text outside the JSON object.");
+
+        return prompt.toString();
+        
+    }
+    
+
+
     private <T> T parseJSON(String jsonString, Class<T> valueType) {
         try {
             jsonString = cleanJSON(jsonString);
@@ -114,7 +156,7 @@ public class GeminiAIService {
         }
     }
     
-    // Parse JSON array
+
     private <T> T parseJSONArray(String jsonString, TypeReference<T> typeReference) {
         try {
             jsonString = cleanJSON(jsonString);
@@ -123,7 +165,7 @@ public class GeminiAIService {
             throw new RuntimeException("Failed to parse JSON array response: " + jsonString, e);
         }
     }
- // Clean up markdown formatting
+
     private String cleanJSON(String jsonString) {
         jsonString = jsonString.trim();
         if (jsonString.startsWith("```")) {

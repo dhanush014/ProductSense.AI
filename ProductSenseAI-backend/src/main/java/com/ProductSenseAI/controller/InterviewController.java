@@ -1,12 +1,25 @@
 package com.ProductSenseAI.controller;
 
-import java.util.UUID;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.ProductSenseAI.DTO.*;
+import com.ProductSenseAI.DTO.EstimationQuestion;
+import com.ProductSenseAI.DTO.FinalScoreRequest;
+import com.ProductSenseAI.DTO.FinalScoreResponse;
+import com.ProductSenseAI.DTO.InterviewSession;
+import com.ProductSenseAI.DTO.MCQQuestion;
+import com.ProductSenseAI.DTO.MCQQuestionsResponse;
+import com.ProductSenseAI.DTO.QuestionRequest;
+import com.ProductSenseAI.DTO.RCAQuestion;
+import com.ProductSenseAI.DTO.StartRequest;
+import com.ProductSenseAI.DTO.StartResponse;
 import com.ProductSenseAI.service.GeminiAIService;
 import com.ProductSenseAI.service.SessionManager;
 
@@ -35,7 +48,7 @@ public class InterviewController {
 	    }
 
 	    // NEW: Get all 5 MCQ questions at once
-	    @PostMapping("/questions/mcq")
+	    @PostMapping("/question/mcq")
 	    public ResponseEntity<MCQQuestionsResponse> getAllMCQQuestions(@RequestBody QuestionRequest request) {
 	        InterviewSession session = sessionManager.getSession(request.getSessionId());
 	        
@@ -73,41 +86,18 @@ public class InterviewController {
 	        return ResponseEntity.ok(question);
 	    }
 
-	    @PostMapping("/answer")
-	    public ResponseEntity<Void> submitAnswer(@RequestBody AnswerRequest request) {
-	        InterviewSession session = sessionManager.getSession(request.getSessionId());
-	        
-	        if (session == null) {
-	            return ResponseEntity.badRequest().build();
-	        }
-	        
-	        String key = request.getQuestionType() + 
-	                    (request.getQuestionNumber() != null ? "-" + request.getQuestionNumber() : "");
-	        session.addAnswer(key, request.getAnswer());
-	        
-	        return ResponseEntity.ok().build();
-	    }
+
 	    
 	    @PostMapping("/final-score")
 	    public ResponseEntity<FinalScoreResponse> getFinalScore(@RequestBody FinalScoreRequest request) {
-	        InterviewSession session = sessionManager.getSession(request.getSessionId());
-	        
-	        if (session == null) {
+	        // Validate request (optional but recommended)
+	        if (request.getMcqAnswers() == null || request.getRca() == null || request.getEstimation() == null) {
 	            return ResponseEntity.badRequest().build();
 	        }
 	        
-	        String feedback = geminiAIService.gradeInterview(
-	            session.getUserName(), 
-	            session.getChoice(), 
-	            session.getAllAnswersAsString()
-	        );
+	        	        FinalScoreResponse response = geminiAIService.gradeInterview(request);
 	        
-	        String thankYou = "Thank you for taking the time to interview with us, " + 
-	                         session.getUserName() + "!";
-	        
-	        sessionManager.removeSession(request.getSessionId());
-	        
-	        FinalScoreResponse response = new FinalScoreResponse(feedback, thankYou);
 	        return ResponseEntity.ok(response);
 	    }
-}
+	    }
+
