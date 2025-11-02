@@ -40,7 +40,16 @@
       </div>
   
       <div class="d-flex justify-content-center">
-        <button type="submit" class="start-btn">Start Interview</button>
+        <button type="submit" class="start-btn" [disabled]="loading">
+          <ng-container *ngIf="loading">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...
+          </ng-container>
+          <ng-container *ngIf="!loading">
+            Start Interview
+          </ng-container>
+        </button>   
+        <p *ngIf="timerMessage" class="text-center timer-message">{{ timerMessage }}</p>
+      
       </div>
           </form>
   </div>

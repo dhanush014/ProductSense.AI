@@ -19,8 +19,8 @@ public class GeminiAIService {
     }
 
     public String generateWittyGreeting(String userName) {
-        String prompt = "You are a Principal PM at a big tech company conducting a product management interview. " +
-                        "Greet " + userName + " with a witty and professional introduction in 2-3 sentences. " +
+        String prompt = "Your name is John Doe and You are a Principal PM at Product Sense AI conducting a product management interview. " +
+                        "Greet " + userName + " with a witty and professional introduction in 2-3 sentences. Do " +
                         "Keep it brief and engaging. Return only the greeting text, no extra formatting.";
         
         return chatClient.prompt()

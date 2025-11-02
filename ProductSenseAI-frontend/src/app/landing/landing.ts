@@ -21,6 +21,9 @@ export class Landing implements OnInit{
 
   submitted = false;
   wittyGreeting = '';
+  loading = false;
+timerMessage = '';
+
   mcqQuestions: any[] = [];
 
   constructor(
@@ -73,32 +76,16 @@ export class Landing implements OnInit{
     if (this.landingForm.invalid) {
       return;
     }
-
-    // Process form values or store in a service as needed
+    this.loading = true;
+    this.timerMessage = 'Using a free version of Render so waking up the backend, give us a couple of minutes...';
+    setTimeout(() => {
+      this.timerMessage = '';
+      this.loading = false;
+    }, 20000);
+  
     const { name, role } = this.landingForm.value;
     console.log('Starting interview for', name, role);
-    // this.api.startInterview(name, role).subscribe({
-    //   next: resp => {
-    //     console.log(resp)
-    //     // Save session information for next sections
-    //     localStorage.setItem('sessionId', resp.sessionId);
-    //     localStorage.setItem('wittyGreeting', resp.wittyGreeting);
-        
-    //     this.wittyGreeting = resp.wittyGreeting;
-    //     this.api.getMcq(resp.sessionId, 'mcq', 0).subscribe(mcqResp => {
-    //       this.mcqQuestions = mcqResp.questions;
-    //       // Save questions in localStorage/session or a shared service
-    //       localStorage.setItem('mcqQuestions', JSON.stringify(this.mcqQuestions));
-    //       localStorage.setItem('wittyGreeting', this.wittyGreeting);
-    //       this.router.navigate(['/sectionone']);
-    //     });
 
-    //   },
-    //   error: err => {
-    //     alert('Could not start interview, please try again later');
-    //     console.error(err);
-    //   }
-    // });
 
     this.api.startInterview(name, role).subscribe({
       next: resp => {
@@ -106,9 +93,16 @@ export class Landing implements OnInit{
         localStorage.setItem('wittyGreeting', resp.wittyGreeting);
         localStorage.setItem('userName', name);
         localStorage.setItem('choice', role);
-        this.router.navigate(['/section1']);
+        this.router.navigate(['/section1']).then(() => {
+          // Clear loading and message only after navigation completes
+          this.loading = false;
+          this.timerMessage = '';});
       },
-      error: () => alert('Failed to start interview. Please try again.')
-    });
+     error: () => {
+      alert('Failed to start interview. Please try again.');
+      // this.loading = false;
+      // this.timerMessage = '';
+    }
+  });
   }
 }

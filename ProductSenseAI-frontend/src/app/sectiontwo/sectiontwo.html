@@ -28,9 +28,9 @@
     <strong>Question:</strong>
     <p class="mb-3">{{ followUp }}</p>
   </div>
-  <small class="text-warning fst-italic">
+  <!-- <small class="text-warning fst-italic">
     ⚠️ You need to type something that has 30 characters at least...
-  </small>
+  </small> -->
   <textarea
     class="form-control mb-4 big-textarea"
     rows="8"
@@ -46,7 +46,6 @@
     <button
       type="button"
       class="btn btn-primary"
-      [disabled]="answer.trim().length < 30"
       (click)="onNext()"
     >
       Next Section

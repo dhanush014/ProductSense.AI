@@ -8,15 +8,26 @@
   }
   
   .timer {
+    top: 3.8rem;      /* push the timer down from very top, adjust as needed */
+    right: 2.2rem;
+    position: fixed;
     width: 10vw;
     min-width: 140px;
-    font-family: 'Inter', sans-serif;
-    border: 1px solid #00BFFF;
-    box-shadow: 0 0 12px #00BFFF;
-    user-select: none;
+    background: #181e24;
+    border: 1.5px solid #00BFFF;
+    box-shadow: 0 0 12px #00BFFF45;
+    color: #d3f6ff !important;
+    text-align: center;
+    border-radius: 13px;
     z-index: 1050;
+    font-family: 'Roboto', Arial, sans-serif;
   }
-  
+  .timer,
+  .timer .fs-6,
+  .timer .fs-4,
+  .timer * {
+    color: #d3f6ff !important;
+  }
   .estimate-input {
     background-color: #1e1e1e;
     color: #fff;

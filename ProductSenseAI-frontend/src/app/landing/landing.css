@@ -207,3 +207,13 @@ form input:focus, form select:focus {
   50% { border-color: #53c7ef; }
 }
 
+.timer-message {
+  margin-top: 15px;
+  font-style: italic;
+  color: #888;
+}
+
+.start-btn[disabled] {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
